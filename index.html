@@ -1,12 +1,1068 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>John Nichol Leproso | Growth & Marketing Strategist.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+        }
+        
+        :root {
+            --bg-primary: #ECE7D1;
+            --bg-secondary: #E5E0C8;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --accent: #d946ef;
+            --accent-soft: rgba(217, 70, 239, 0.1);
+            --border: rgba(0,0,0,0.08);
+            --card: rgba(255,255,255,0.6);
+        }
+        
+        [data-theme="dark"] {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --text-primary: #f5f5f5;
+            --text-secondary: #a0a0b0;
+            --accent: #e879f9;
+            --accent-soft: rgba(232, 121, 249, 0.15);
+            --border: rgba(255,255,255,0.08);
+            --card: rgba(255,255,255,0.03);
+        }
+        
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+        
+        .theme-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-panel {
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+        }
+        
+        .nav-item {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 0;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: height 0.3s ease;
+        }
+        
+        .nav-item.active::before {
+            height: 20px;
+        }
+        
+        .nav-item:hover::before {
+            height: 12px;
+        }
+        
+        .gradient-accent {
+            background: linear-gradient(135deg, #d946ef 0%, #ec4899 50%, #f43f5e 100%);
+        }
+        
+        [data-theme="dark"] .gradient-accent {
+            background: linear-gradient(135deg, #e879f9 0%, #f472b6 50%, #fb7185 100%);
+        }
+        
+        .capability-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .capability-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+        }
+        
+        [data-theme="dark"] .capability-card:hover {
+            box-shadow: 0 20px 40px -15px rgba(232, 121, 249, 0.15);
+        }
+        
+        .experience-block {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .experience-block::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, var(--accent-soft) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .experience-block:hover::after {
+            opacity: 1;
+        }
+        
+        .lang-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .lang-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .lang-btn.active::after {
+            transform: scaleX(1);
+        }
+        
+        @media (max-width: 1024px) {
+            .side-nav {
+                display: none;
+            }
+            .bottom-nav {
+                display: flex;
+            }
+            .main-content {
+                margin-left: 0;
+                padding-bottom: 100px;
+            }
+        }
+        
+        @media (min-width: 1025px) {
+            .side-nav {
+                display: flex;
+            }
+            .bottom-nav {
+                display: none;
+            }
+            .main-content {
+                margin-left: 280px;
+            }
+        }
+        
+        .section-fade {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        [data-theme="dark"] .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #e879f9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .pill {
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+        
+        .safe-area-bottom {
+            padding-bottom: env(safe-area-inset-bottom, 20px);
+        }
+    </style>
 </head>
-<body>
-    <h1>Welcome to My Portfolio</h1>
-    <p>This is my portfolio website.</p>
+<body class="antialiased overflow-x-hidden">
+
+    <!-- Side Navigation (Desktop) -->
+    <nav class="side-nav fixed left-0 top-0 h-full w-64 z-50 flex-col justify-between p-8 glass-panel theme-transition hidden lg:flex">
+        <div>
+            <div class="mb-12">
+                <h1 class="text-2xl font-bold tracking-tight mb-1" data-i18n="boss">John Nichol Leproso</h1>
+                <p class="text-sm text-[var(--text-secondary)]" data-i18n="role">Growth & Marketing Strategist.</p>
+            </div>
+            
+            <div class="space-y-2">
+                <a href="#overview" class="nav-item active block py-3 px-4 rounded-lg text-sm font-medium hover:bg-[var(--bg-secondary)] transition-colors" data-section="overview">
+                    <span data-i18n="nav.overview">Overview</span>
+                </a>
+                <a href="#capabilities" class="nav-item block py-3 px-4 rounded-lg text-sm font-medium hover:bg-[var(--bg-secondary)] transition-colors" data-section="capabilities">
+                    <span data-i18n="nav.capabilities">Capabilities</span>
+                </a>
+                <a href="#experience" class="nav-item block py-3 px-4 rounded-lg text-sm font-medium hover:bg-[var(--bg-secondary)] transition-colors" data-section="experience">
+                    <span data-i18n="nav.experience">Experience</span>
+                </a>
+                <a href="#approach" class="nav-item block py-3 px-4 rounded-lg text-sm font-medium hover:bg-[var(--bg-secondary)] transition-colors" data-section="approach">
+                    <span data-i18n="nav.approach">Approach</span>
+                </a>
+                <a href="#contact" class="nav-item block py-3 px-4 rounded-lg text-sm font-medium hover:bg-[var(--bg-secondary)] transition-colors" data-section="contact">
+                    <span data-i18n="nav.contact">Contact</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="space-y-4">
+            <!-- Language Toggle -->
+            <div class="flex gap-2 p-1 rounded-lg bg-[var(--bg-secondary)]">
+                <button onclick="setLanguage('ja')" class="lang-btn flex-1 py-2 text-xs font-medium rounded transition-all" data-lang="ja">JP</button>
+                <button onclick="setLanguage('en')" class="lang-btn active flex-1 py-2 text-xs font-medium rounded transition-all" data-lang="en">EN</button>
+            </div>
+            
+            <!-- Theme Toggle -->
+            <button onclick="toggleTheme()" class="w-full py-3 px-4 rounded-lg glass-panel flex items-center justify-center gap-2 hover:bg-[var(--bg-secondary)] transition-all group">
+                <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+                <span class="text-sm font-medium" data-i18n="theme.toggle">Theme</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Bottom Navigation (Mobile) -->
+    <nav class="bottom-nav fixed bottom-0 left-0 right-0 z-50 glass-panel safe-area-bottom lg:hidden">
+        <div class="flex justify-around items-center py-3 px-4 max-w-lg mx-auto">
+            <a href="#overview" class="flex flex-col items-center gap-1 p-2 rounded-lg nav-item-mobile active" data-section="overview">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                </svg>
+                <span class="text-[10px]" data-i18n="nav.overview">Overview</span>
+            </a>
+            <a href="#capabilities" class="flex flex-col items-center gap-1 p-2 rounded-lg nav-item-mobile" data-section="capabilities">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+                <span class="text-[10px]" data-i18n="nav.capabilities">Capabilities</span>
+            </a>
+            <a href="#experience" class="flex flex-col items-center gap-1 p-2 rounded-lg nav-item-mobile" data-section="experience">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+                <span class="text-[10px]" data-i18n="nav.experience">Experience</span>
+            </a>
+            <a href="#approach" class="flex flex-col items-center gap-1 p-2 rounded-lg nav-item-mobile" data-section="approach">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                </svg>
+                <span class="text-[10px]" data-i18n="nav.approach">Approach</span>
+            </a>
+            <a href="#contact" class="flex flex-col items-center gap-1 p-2 rounded-lg nav-item-mobile" data-section="contact">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+                <span class="text-[10px]" data-i18n="nav.contact">Contact</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Mobile Header -->
+    <header class="lg:hidden fixed top-0 left-0 right-0 z-40 glass-panel px-6 py-4 flex justify-between items-center">
+        <div>
+            <h1 class="text-lg font-bold" data-i18n="boss">John Nichol Leproso</h1>
+            <p class="text-xs text-[var(--text-secondary)]" data-i18n="role">Growth & Marketing Strategist.</p>
+        </div>
+        <div class="flex items-center gap-3">
+            <button onclick="toggleLanguage()" class="p-2 rounded-lg bg-[var(--bg-secondary)] text-xs font-medium w-10 h-10 flex items-center justify-center" id="mobile-lang-btn">
+                EN
+            </button>
+            <button onclick="toggleTheme()" class="p-2 rounded-lg bg-[var(--bg-secondary)] w-10 h-10 flex items-center justify-center">
+                <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+                <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content min-h-screen lg:pt-0 pt-20">
+        
+        <!-- Executive Overview -->
+        <section id="overview" class="min-h-screen flex items-center px-6 lg:px-16 py-20 lg:py-0">
+            <div class="max-w-4xl w-full section-fade">
+                <div class="mb-8">
+                    <span class="pill px-4 py-2 rounded-full text-xs font-semibold tracking-wide uppercase mb-6 inline-block" data-i18n="overview.tag">Executive Profile</span>
+                </div>
+                
+                <h2 class="text-4xl lg:text-6xl font-bold leading-tight mb-8 text-gradient">
+                    <span data-i18n="overview.headline">Marketing operator with business acumen and technical fluency</span>
+                </h2>
+                
+                <p class="text-lg lg:text-xl text-[var(--text-secondary)] leading-relaxed mb-12 max-w-2xl" data-i18n="overview.description">
+                    Cross-cultural marketing professional bridging Philippines and Japan markets. 
+                    Combining strategic vision with execution excellence. Building toward marketing leadership 
+                    through measurable impact and operational mastery.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-xl glass-panel">
+                        <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                        <span class="text-sm font-medium" data-i18n="overview.status">Available for opportunities</span>
+                    </div>
+                    <div class="flex items-center gap-3 px-5 py-3 rounded-xl glass-panel">
+                        <svg class="w-4 h-4 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span class="text-sm font-medium" data-i18n="overview.location">Cebu, Philippines</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Capability Stack -->
+        <section id="capabilities" class="min-h-screen px-6 lg:px-16 py-20 lg:py-32">
+            <div class="max-w-6xl w-full">
+                <div class="mb-16 section-fade">
+                    <span class="pill px-4 py-2 rounded-full text-xs font-semibold tracking-wide uppercase mb-6 inline-block" data-i18n="capabilities.tag">WHAT I OFFER</span>
+                    <h2 class="text-3xl lg:text-5xl font-bold mb-6" data-i18n="capabilities.headline">Core Areas of Contribution</h2>
+                    <p class="text-[var(--text-secondary)] text-lg max-w-2xl" data-i18n="capabilities.subheadline">
+                        Not tools. Not tactics. Systems thinking that drives results.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+
+                            <!-- Marketing -->
+                            <div class="capability-card glass-panel rounded-2xl p-8 section-fade delay-100">
+                            <div class="w-12 h-12 rounded-xl gradient-accent flex items-center justify-center mb-6">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                            </svg>
+                            </div>
+
+                            <h3 class="text-xl font-bold mb-4" data-i18n="capabilities.marketing.title">Marketing (Primary Role)</h3>
+
+
+                            <ul class="space-y-3 text-[var(--text-secondary)]">
+                            <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2"></span><span data-i18n="capabilities.marketing.item1">Campaign planning and execution</span></li>
+                            <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2"></span><span data-i18n="capabilities.marketing.item2">Lead generation and funnel optimization</span></li>
+                            <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2"></span><span data-i18n="capabilities.marketing.item3">Content and performance-based marketing</span></li>
+                            <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2"></span><span data-i18n="capabilities.marketing.item4">Cross-team coordination and reporting</span></li>
+                            </ul>
+                            </div>
+
+
+                            <!-- Growth -->
+                            <div class="capability-card glass-panel rounded-2xl p-8 section-fade delay-200">
+                            <div class="w-12 h-12 rounded-xl gradient-accent flex items-center justify-center mb-6">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 17l6-6 4 4 8-8"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 7h7v7"></path>
+                            </svg>
+                            </div>
+
+                            <h3 class="text-xl font-bold mb-4" data-i18n="capabilities.growth.title">Growth & Conversion Support</h3>
+
+                            <ul class="space-y-3 text-[var(--text-secondary)]">
+                            <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2"></span><span data-i18n="capabilities.growth.item1">Website conversion and UX feedback</span></li>
+                            <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2"></span><span data-i18n="capabilities.growth.item2">Landing page structure and CTA optimization</span></li>
+                            <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2"></span><span data-i18n="capabilities.growth.item3">Marketing-driven layout recommendations</span></li>
+                            </ul>
+                            </div>
+
+
+                            <!-- Web / AI Design -->
+                            <div class="capability-card glass-panel rounded-2xl p-8 section-fade delay-300">
+                            <div class="w-12 h-12 rounded-xl gradient-accent flex items-center justify-center mb-6">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                            </div>
+
+                            <h3 class="text-xl font-bold mb-4" data-i18n="capabilities.web.title">Web & AI-Assisted Design Support</h3>
+
+                            <ul class="space-y-3 text-[var(--text-secondary)]">
+                            <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2"></span><span data-i18n="capabilities.web.item1">Website fixes using AI web builders</span></li>
+                            <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2"></span><span data-i18n="capabilities.web.item2">Basic HTML/CSS layout adjustments</span></li>
+                            <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2"></span><span data-i18n="capabilities.web.item3">Rapid iteration without heavy redesign costs</span></li>
+                            </ul>
+                            </div>
+
+
+                            <!-- Community -->
+                            <div class="capability-card glass-panel rounded-2xl p-8 section-fade delay-400">
+                            <div class="w-12 h-12 rounded-xl gradient-accent flex items-center justify-center mb-6">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5V4H2v16h5"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6M9 16h6M9 8h6"></path>
+                            </svg>
+                            </div>
+
+                            <h3 class="text-xl font-bold mb-4" data-i18n="capabilities.community.title">Community & Content Foundations</h3>
+
+                            <ul class="space-y-3 text-[var(--text-secondary)]">
+                            <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2"></span><span data-i18n="capabilities.community.item1">Building and managing community pages</span></li>
+                            <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2"></span><span data-i18n="capabilities.community.item2">Blog setup and CMS content structure</span></li>
+                            <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2"></span><span data-i18n="capabilities.community.item3">Content planning aligned with brand goals</span></li>
+                            </ul>
+                            </div>
+
+
+                            <!-- Product -->
+                            <div class="capability-card glass-panel rounded-2xl p-8 section-fade delay-500">
+                            <div class="w-12 h-12 rounded-xl gradient-accent flex items-center justify-center mb-6">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 16v-2m8-6h2M2 12h2m15.364 6.364l1.414 1.414M4.222 4.222l1.414 1.414m12.728-1.414l-1.414 1.414M4.222 19.778l1.414-1.414"></path>
+                            </svg>
+                            </div>
+
+                            <h3 class="text-xl font-bold mb-4" data-i18n="capabilities.product.title">Product / App Collaboration</h3>
+
+                            <ul class="space-y-3 text-[var(--text-secondary)]">
+                            <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2"></span><span data-i18n="capabilities.product.item1">Coordinating with developers on marketing features</span></li>
+                            <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2"></span><span data-i18n="capabilities.product.item2">App content, flow, and UI feedback</span></li>
+                            <li class="flex items-start gap-3"><span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] mt-2"></span><span data-i18n="capabilities.product.item3">Supporting launches and user communication</span></li>
+                            </ul>
+                            </div>
+
+                            </div>
+            </div>
+        </section>
+
+        <!-- Experience Highlights -->
+        <section id="experience" class="min-h-screen px-6 lg:px-16 py-20 lg:py-32">
+            <div class="max-w-6xl w-full">
+                <div class="mb-16 section-fade">
+                    <span class="pill px-4 py-2 rounded-full text-xs font-semibold tracking-wide uppercase mb-6 inline-block" data-i18n="experience.tag">Track Record</span>
+                    <h2 class="text-3xl lg:text-5xl font-bold mb-6" data-i18n="experience.headline">Experience That Builds Leaders</h2>
+                    <p class="text-[var(--text-secondary)] text-lg max-w-2xl" data-i18n="experience.subheadline">
+                        Context. Responsibility. Impact. Selected highlights demonstrating trajectory.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Fintech -->
+                    <div class="experience-block glass-panel rounded-2xl p-8 section-fade delay-100">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold text-lg">F</div>
+                            <span class="text-xs font-medium text-[var(--text-secondary)] px-3 py-1 rounded-full bg-[var(--bg-secondary)]" data-i18n="experience.fintech.period">Recent</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2" data-i18n="experience.fintech.title">Fintech Marketing & Operations</h3>
+                        <p class="text-sm text-[var(--text-secondary)] mb-4" data-i18n="experience.fintech.role">Marketing · Customer Success · Team Leadership</p>
+                        <p class="text-[var(--text-secondary)] leading-relaxed" data-i18n="experience.fintech.description">
+                            Bridged marketing execution with customer-facing operations. Led cross-functional initiatives 
+                            requiring coordination between product, legal, and growth teams. Developed systems-thinking 
+                            approach to scalable customer acquisition.
+                        </p>
+                    </div>
+
+                    <!-- Startup -->
+                    <div class="experience-block glass-panel rounded-2xl p-8 section-fade delay-200">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-bold text-lg">S</div>
+                            <span class="text-xs font-medium text-[var(--text-secondary)] px-3 py-1 rounded-full bg-[var(--bg-secondary)]" data-i18n="experience.startup.period">Previous</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2" data-i18n="experience.startup.title">Startup Business Coordination</h3>
+                        <p class="text-sm text-[var(--text-secondary)] mb-4" data-i18n="experience.startup.role">Business Planning · Operations · Strategy</p>
+                        <p class="text-[var(--text-secondary)] leading-relaxed" data-i18n="experience.startup.description">
+                            Early-stage operational foundation building. Navigated ambiguity to establish business processes, 
+                            coordinate stakeholders, and execute go-to-market planning in resource-constrained environments.
+                        </p>
+                    </div>
+
+                    <!-- E-commerce -->
+                    <div class="experience-block glass-panel rounded-2xl p-8 section-fade delay-100">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white font-bold text-lg">E</div>
+                            <span class="text-xs font-medium text-[var(--text-secondary)] px-3 py-1 rounded-full bg-[var(--bg-secondary)]" data-i18n="experience.ecommerce.period">Foundation</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2" data-i18n="experience.ecommerce.title">E-commerce Marketing Exposure</h3>
+                        <p class="text-sm text-[var(--text-secondary)] mb-4" data-i18n="experience.ecommerce.role">Digital Marketing · Campaign Management</p>
+                        <p class="text-[var(--text-secondary)] leading-relaxed" data-i18n="experience.ecommerce.description">
+                            Hands-on experience with performance marketing fundamentals. Learned conversion optimization, 
+                            audience segmentation, and the balance between creative messaging and data-driven decisions.
+                        </p>
+                    </div>
+
+                    <!-- Student Leadership -->
+                    <div class="experience-block glass-panel rounded-2xl p-8 section-fade delay-200">
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center text-white font-bold text-lg">L</div>
+                            <span class="text-xs font-medium text-[var(--text-secondary)] px-3 py-1 rounded-full bg-[var(--bg-secondary)]" data-i18n="experience.leadership.period">University</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2" data-i18n="experience.leadership.title">Student Organization Leadership</h3>
+                        <p class="text-sm text-[var(--text-secondary)] mb-4" data-i18n="experience.leadership.role">President · Co-founder · Event Director</p>
+                        <p class="text-[var(--text-secondary)] leading-relaxed" data-i18n="experience.leadership.description">
+                            Led student organizations and co-founded inter-university event initiatives. Developed 
+                            leadership fundamentals: team motivation, stakeholder alignment, and delivering outcomes 
+                            under deadline pressure.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Japan Experience Banner -->
+                <div class="mt-8 glass-panel rounded-2xl p-8 section-fade delay-300 border-l-4 border-[var(--accent)]">
+                    <div class="flex items-start gap-6">
+                        <div class="w-16 h-16 rounded-full bg-[var(--accent-soft)] flex items-center justify-center flex-shrink-0">
+                            <svg class="w-8 h-8 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2" data-i18n="experience.japan.title">Cross-Cultural Market Expertise</h3>
+                            <p class="text-[var(--text-secondary)] leading-relaxed" data-i18n="experience.japan.description">
+                                Philippines-Japan cross-cultural professional. Adapted to Japanese business culture while 
+                                maintaining international perspective. Unique positioning for companies targeting 
+                                cross-border markets or requiring bilingual marketing operations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Marketing Approach -->
+        <section id="approach" class="min-h-screen px-6 lg:px-16 py-20 lg:py-32">
+            <div class="max-w-4xl w-full">
+                <div class="mb-16 section-fade">
+                    <span class="pill px-4 py-2 rounded-full text-xs font-semibold tracking-wide uppercase mb-6 inline-block" data-i18n="approach.tag">Philosophy</span>
+                    <h2 class="text-3xl lg:text-5xl font-bold mb-6" data-i18n="approach.headline">How I Think About Marketing</h2>
+                </div>
+
+                <div class="space-y-8">
+                    <div class="glass-panel rounded-2xl p-8 lg:p-10 section-fade delay-100">
+                        <div class="flex items-start gap-6">
+                            <div class="w-12 h-12 rounded-full gradient-accent flex items-center justify-center text-white font-bold text-xl flex-shrink-0">1</div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-3" data-i18n="approach.adaptability.title">Adaptability Over Static Playbooks</h3>
+                                <p class="text-[var(--text-secondary)] leading-relaxed" data-i18n="approach.adaptability.description">
+                                    Markets shift. Channels evolve. Consumer behavior transforms. The marketer who wins 
+                                    isn't the one with the perfect plan—it's the one who learns fastest and adjusts 
+                                    clearest. I prioritize frameworks over formulas.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl p-8 lg:p-10 section-fade delay-200">
+                        <div class="flex items-start gap-6">
+                            <div class="w-12 h-12 rounded-full gradient-accent flex items-center justify-center text-white font-bold text-xl flex-shrink-0">2</div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-3" data-i18n="approach.system.title">Marketing as a System</h3>
+                                <p class="text-[var(--text-secondary)] leading-relaxed" data-i18n="approach.system.description">
+                                    Marketing isn't a collection of tactics—it's an integrated system. Brand informs 
+                                    performance. Product insights drive messaging. Customer feedback shapes strategy. 
+                                    I connect these dots rather than optimizing silos.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel rounded-2xl p-8 lg:p-10 section-fade delay-300">
+                        <div class="flex items-start gap-6">
+                            <div class="w-12 h-12 rounded-full gradient-accent flex items-center justify-center text-white font-bold text-xl flex-shrink-0">3</div>
+                            <div>
+                                <h3 class="text-xl font-bold mb-3" data-i18n="approach.velocity.title">Learning Velocity as Advantage</h3>
+                                <p class="text-[var(--text-secondary)] leading-relaxed" data-i18n="approach.velocity.description">
+                                    In rapidly changing markets, the ability to acquire new skills, understand new 
+                                    platforms, and synthesize new information becomes the core competitive advantage. 
+                                    I invest heavily in learning infrastructure—my own and my team's.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="min-h-screen flex items-center px-6 lg:px-16 py-20 lg:py-0">
+            <div class="max-w-4xl w-full section-fade">
+                <div class="mb-12">
+                    <span class="pill px-4 py-2 rounded-full text-xs font-semibold tracking-wide uppercase mb-6 inline-block" data-i18n="contact.tag">Connect</span>
+                    <h2 class="text-3xl lg:text-5xl font-bold mb-6" data-i18n="contact.headline">Let's Build Something</h2>
+                    <p class="text-lg text-[var(--text-secondary)] max-w-2xl" data-i18n="contact.description">
+                        Seeking marketing leadership opportunities where business impact and team development intersect. 
+                        Open to roles in fintech, SaaS, and cross-border ventures.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-12">
+
+                                    <a href="mailto:john.amimarketing@email.com" onclick="copyEmail(event)" class="glass-panel rounded-2xl p-8 flex items-center gap-4 hover:scale-[1.02] transition-transform group">
+
+                                    <div class="w-14 h-14 flex-shrink-0 rounded-xl bg-[var(--accent-soft)] flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <svg class="w-6 h-6 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    </svg>
+                                    </div>
+
+                                    <div class="min-w-0">
+                                    <p class="text-sm text-[var(--text-secondary)] mb-1" data-i18n="contact.email.label">
+                                    Email
+                                    </p>
+                                    <p class="text-lg font-semibold break-all">
+                                    john.amimarketing@email.com
+                                    </p>
+                                    </div>
+
+                                    </a>
+
+                                        <a href="https://docs.google.com/document/d/1KWzQxiTb8eHQRWDGRPYLQ-UtUgHOhsuoxBHSlgPshu4/edit?usp=sharing"
+                                        target="_blank"
+                                        class="glass-panel rounded-2xl p-8 flex items-center gap-4 hover:scale-[1.02] transition-transform group">
+
+                                        <div class="w-14 h-14 flex-shrink-0 rounded-xl bg-[var(--accent-soft)] flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <svg class="w-6 h-6 text-[var(--accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                        </svg>
+                                        </div>
+
+                                        <div>
+                                        <p class="text-sm text-[var(--text-secondary)] mb-1" data-i18n="contact.resume.label">
+                                        Resume
+                                        </p>
+                                        <p class="text-lg font-semibold" data-i18n="contact.download">
+                                        Download Resume
+                                        </p>
+                                        </div>
+
+                                        </a>
+
+                    </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="px-6 lg:px-16 py-12 border-t border-[var(--border)]">
+            <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-[var(--text-secondary)]">
+                    © 2024 JNLeproso. <span data-i18n="footer.rights">All rights reserved.</span>
+                </p>
+                <p class="text-sm text-[var(--text-secondary)]">
+                    <span data-i18n="footer.built">Built with purpose.</span>
+                </p>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        // Translations
+        const translations = {
+            ja: {
+
+                boss: "レプロソ, ジョン",
+                
+                role: "グロース＆マーケティング戦略家",
+                nav: {
+                    overview: "概要",
+                    capabilities: "能力",
+                    experience: "経験",
+                    approach: "アプローチ",
+                    contact: "連絡先"
+                },
+                theme: { toggle: "テーマ" },
+                overview: {
+                    tag: "エグゼクティブプロフィール",
+                    headline: "ビジネス感覚と技術的素養を持つマーケティングオペレーター",
+                    description: "フィリピンと日本の市場を橋渡しするクロスカルチャー・マーケティングプロフェッショナル。戦略的ビジョンと実行の卓越性を組み合わせ、測定可能なインパクトとオペレーショナル・マスタリーを通じてマーケティングリーダーシップを構築しています。",
+                    status: "機会を探しています",
+                    location: "セブ、フィリピン"
+                },
+                capabilities: {
+                        tag: "提供できること",
+                        headline: "提供できる主な分野",
+                        subheadline: "マーケティング、成長支援、Web改善など、実務ベースでサポートできます。",
+                        
+                                    marketing: {
+                                    title: "マーケティング（主な役割）",
+                                    item1: "キャンペーンの企画と実行",
+                                    item2: "リード獲得とファネル最適化",
+                                    item3: "コンテンツ・パフォーマンスマーケティング",
+                                    item4: "チーム間連携とレポーティング"
+                                    },
+
+                                    growth: {
+                                    title: "グロース・コンバージョン支援",
+                                    item1: "WebサイトのCV改善とUXフィードバック",
+                                    item2: "ランディングページ構造とCTA最適化",
+                                    item3: "マーケティング視点でのレイアウト改善提案"
+                                    },
+
+                                    web: {
+                                    title: "Web・AIデザイン支援",
+                                    item1: "AIツールを使ったWeb改善",
+                                    item2: "HTML/CSSによる基本的なレイアウト調整",
+                                    item3: "大規模リデザインなしでの迅速な改善"
+                                    },
+
+                                    community: {
+                                    title: "コミュニティ・コンテンツ基盤",
+                                    item1: "コミュニティページの構築・管理",
+                                    item2: "ブログ / CMSコンテンツ構造の設定",
+                                    item3: "ブランドに沿ったコンテンツ企画"
+                                    },
+
+                                    product: {
+                                    title: "プロダクト / アプリ連携（基礎サポート）",
+                                    item1: "開発チームとのマーケティング機能調整",
+                                    item2: "アプリ内コンテンツ・UXのフィードバック",
+                                    item3: "リリース・ユーザーコミュニケーション支援"
+                                    }
+                },
+                
+                experience: {
+                    tag: "実績",
+                    headline: "リーダーを育てる経験",
+                    subheadline: "文脈。責任。インパクト。軌道を示す厳選ハイライト。",
+                    fintech: {
+                        period: "最近",
+                        title: "フィンテック マーケティング・オペレーション",
+                        role: "マーケティング・カスタマーサクセス・チームリーダーシップ",
+                        description: "マーケティング実行と顧客対応オペレーションの橋渡し。プロダクト、法務、成長チーム間の調整を必要とするクロスファンクショナルイニシアチブを主導。スケーラブルな顧客獲得へのシステム思考アプローチを開発。"
+                    },
+                    startup: {
+                        period: "以前",
+                        title: "スタートアップ ビジネス調整",
+                        role: "事業計画・オペレーション・戦略",
+                        description: "初期段階のオペレーショナル基盤構築。曖昧さを乗り越えてビジネスプロセスを確立し、ステークホルダーを調整し、リソース制約のある環境でゴートゥーマーケット計画を実行。"
+                    },
+                    ecommerce: {
+                        period: "基盤",
+                        title: "Eコマース マーケティング経験",
+                        role: "デジタルマーケティング・キャンペーン管理",
+                        description: "パフォーマンスマーケティングの基礎を実践。コンバージョン最適化、オーディエンスセグメンテーション、クリエイティブメッセージングとデータ駆動意思決定のバランスを学習。"
+                    },
+                    leadership: {
+                        period: "大学",
+                        title: "学生組織リーダーシップ",
+                        role: "会長・共同創業者・イベントディレクター",
+                        description: "学生組織の主導と大学間イベントイニシアチブの共同創業。リーダーシップの基本を開発：チームモチベーション、ステークホルダーアライメント、締切プレッシャーの中での成果達成。"
+                    },
+                    japan: {
+                        title: "クロスカルチャー市場専門知識",
+                        description: "フィリピン・日本クロスカルチャープロフェッショナル。国際的視点を維持しながら日本のビジネス文化に適応。越境市場をターゲットにする企業や、バイリンガルマーケティングオペレーションを必要とする企業にとって独自のポジショニング。"
+                    }
+                },
+                approach: {
+                    tag: "哲学",
+                    headline: "マーケティングへの考え方",
+                    adaptability: {
+                        title: "固定プレイブックより適応力",
+                        description: "市場は変化する。チャネルは進化する。消費者行動は変容する。勝つマーケターは完璧な計画を持つ者ではなく、最も速く学び、最も明確に調整する者。私は公式よりフレームワークを優先します。"
+                    },
+                    system: {
+                        title: "システムとしてのマーケティング",
+                        description: "マーケティングは戦術の集合ではなく、統合システムです。ブランドがパフォーマンスを導き、プロダクトインサイトがメッセージングを推進し、顧客フィードバックが戦略を形作ります。私はサイロを最適化するのではなく、これらの点を結びます。"
+                    },
+                    velocity: {
+                        title: "学習速度を強みに",
+                        description: "急速に変化する市場において、新しいスキルを習得し、新しいプラットフォームを理解し、新しい情報を統合する能力が中核的な競争優位性となります。私は学習インフラストラクチャーに—自分自身とチームの—大きく投資します。"
+                    }
+                },
+                contact: {
+                    tag: "連絡",
+                    headline: "何かを一緒に作りましょう",
+                    description: "ビジネスインパクトとチーム開発が交差するマーケティングリーダーシップの機会を探しています。フィンテック、SaaS、越境ベンチャーの役職に興味があります。",
+                    email: { label: "メール" },
+                    linkedin: { label: "LinkedIn" },
+                    download: "Resumeをダウンロード"
+                },
+                footer: {
+                    rights: "全著作権所有。",
+                    built: "目的を持って構築。"
+                }
+            },
+            en: {
+
+                boss: "John Nichol Leproso",
+
+                role: "Growth & Marketing Strategist",
+                nav: {
+                    overview: "Overview",
+                    capabilities: "Capabilities",
+                    experience: "Experience",
+                    approach: "Approach",
+                    contact: "Contact"
+                },
+                theme: { toggle: "Theme" },
+                overview: {
+                    tag: "Executive Profile",
+                    headline: "Marketing operator with business acumen and technical fluency",
+                    description: "Cross-cultural marketing professional bridging Philippines and Japan markets. Combining strategic vision with execution excellence. Building toward marketing leadership through measurable impact and operational mastery.",
+                    status: "Available for opportunities",
+                    location: "Cebu, Philippines"
+                },
+                capabilities: {
+                        tag: "What I Offer",
+                        headline: "Core Areas of Contribution",
+                        subheadline: "Marketing, growth support, and practical digital execution.",
+
+                        marketing: {
+                        title: "Marketing (Primary Role)",
+                        item1: "Campaign planning and execution",
+                        item2: "Lead generation and funnel optimization",
+                        item3: "Content and performance marketing",
+                        item4: "Cross-team coordination and reporting"
+                        },
+
+                        growth: {
+                        title: "Growth & Conversion Support",
+                        item1: "Website conversion and UX feedback",
+                        item2: "Landing page structure and CTA optimization",
+                        item3: "Marketing-driven layout recommendations"
+                        },
+
+                        web: {
+                        title: "Web & AI-Assisted Design Support",
+                        item1: "Website fixes using AI web builders",
+                        item2: "Basic HTML/CSS layout adjustments",
+                        item3: "Rapid iteration without heavy redesign costs"
+                        },
+
+                        community: {
+                        title: "Community & Content Foundations",
+                        item1: "Building and managing community pages",
+                        item2: "Blog setup and CMS content structure",
+                        item3: "Content planning aligned with brand goals"
+                        },
+
+                        product: {
+                        title: "Product / App Collaboration",
+                        item1: "Coordinating with developers on marketing features",
+                        item2: "App content, flow, and UI feedback",
+                        item3: "Supporting launches and user communication"
+                        }
+                        },
+                experience: {
+                    tag: "Track Record",
+                    headline: "Experience That Builds Leaders",
+                    subheadline: "Context. Responsibility. Impact. Selected highlights demonstrating trajectory.",
+                    fintech: {
+                        period: "Recent",
+                        title: "Fintech Marketing & Operations",
+                        role: "Marketing · Customer Success · Team Leadership",
+                        description: "Bridged marketing execution with customer-facing operations. Led cross-functional initiatives requiring coordination between product, legal, and growth teams. Developed systems-thinking approach to scalable customer acquisition."
+                    },
+                    startup: {
+                        period: "Previous",
+                        title: "Startup Business Coordination",
+                        role: "Business Planning · Operations · Strategy",
+                        description: "Early-stage operational foundation building. Navigated ambiguity to establish business processes, coordinate stakeholders, and execute go-to-market planning in resource-constrained environments."
+                    },
+                    ecommerce: {
+                        period: "Foundation",
+                        title: "E-commerce Marketing Exposure",
+                        role: "Digital Marketing · Campaign Management",
+                        description: "Hands-on experience with performance marketing fundamentals. Learned conversion optimization, audience segmentation, and the balance between creative messaging and data-driven decisions."
+                    },
+                    leadership: {
+                        period: "University",
+                        title: "Student Organization Leadership",
+                        role: "President · Co-founder · Event Director",
+                        description: "Led student organizations and co-founded inter-university event initiatives. Developed leadership fundamentals: team motivation, stakeholder alignment, and delivering outcomes under deadline pressure."
+                    },
+                    japan: {
+                        title: "Cross-Cultural Market Expertise",
+                        description: "Philippines-Japan cross-cultural professional. Adapted to Japanese business culture while maintaining international perspective. Unique positioning for companies targeting cross-border markets or requiring bilingual marketing operations."
+                    }
+                },
+                approach: {
+                    tag: "Philosophy",
+                    headline: "How I Think About Marketing",
+                    adaptability: {
+                        title: "Adaptability Over Static Playbooks",
+                        description: "Markets shift. Channels evolve. Consumer behavior transforms. The marketer who wins isn't the one with the perfect plan—it's the one who learns fastest and adjusts clearest. I prioritize frameworks over formulas."
+                    },
+                    system: {
+                        title: "Marketing as a System",
+                        description: "Marketing isn't a collection of tactics—it's an integrated system. Brand informs performance. Product insights drive messaging. Customer feedback shapes strategy. I connect these dots rather than optimizing silos."
+                    },
+                    velocity: {
+                        title: "Learning Velocity as Advantage",
+                        description: "In rapidly changing markets, the ability to acquire new skills, understand new platforms, and synthesize new information becomes the core competitive advantage. I invest heavily in learning infrastructure—my own and my team's."
+                    }
+                },
+                contact: {
+                    tag: "Connect",
+                    headline: "Let's Build Something",
+                    description: "Seeking marketing leadership opportunities where business impact and team development intersect. Open to roles in fintech, SaaS, and cross-border ventures.",
+                    email: { label: "Email" },
+                    linkedin: { label: "LinkedIn" },
+                    download: "Download Resume"
+                },
+                footer: {
+                    rights: "All rights reserved.",
+                    built: "Built with purpose."
+                }
+            }
+        };
+
+        let currentLang = 'ja';
+        let currentTheme = 'light';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check system theme preference
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                setTheme('dark');
+            }
+            
+            // Intersection Observer for nav highlighting
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.nav-item, .nav-item-mobile');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navItems.forEach(item => {
+                            item.classList.remove('active');
+                            if (item.getAttribute('data-section') === id) {
+                                item.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            sections.forEach(section => observer.observe(section));
+            
+            // Animation observer
+            const fadeElements = document.querySelectorAll('.section-fade');
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(el => fadeObserver.observe(el));
+        });
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            
+            // Update buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+            });
+            
+            // Update mobile button
+            const mobileBtn = document.getElementById('mobile-lang-btn');
+            if (mobileBtn) {
+                mobileBtn.textContent = lang === 'ja' ? 'EN' : 'JP';
+            }
+            
+            // Update all text elements
+            updateTextContent(document.body, translations[lang]);
+        }
+
+                function copyEmail(event) {
+            const email = "john.amimarketing@email.com";
+
+            navigator.clipboard.writeText(email);
+
+            alert("Email copied: " + email);
+        }
+
+        function toggleLanguage() {
+            setLanguage(currentLang === 'ja' ? 'en' : 'ja');
+        }
+
+        function updateTextContent(element, translations) {
+            const walker = document.createTreeWalker(element, NodeFilter.SHOW_ELEMENT, null, false);
+            let node;
+            
+            while (node = walker.nextNode()) {
+                const key = node.getAttribute('data-i18n');
+                if (key) {
+                    const keys = key.split('.');
+                    let value = translations;
+                    for (const k of keys) {
+                        if (value && value[k]) {
+                            value = value[k];
+                        } else {
+                            value = null;
+                            break;
+                        }
+                    }
+                    if (value && typeof value === 'string') {
+                        node.textContent = value;
+                    }
+                }
+            }
+        }
+
+        function toggleTheme() {
+            setTheme(currentTheme === 'light' ? 'dark' : 'light');
+        }
+
+        function setTheme(theme) {
+            currentTheme = theme;
+            document.documentElement.setAttribute('data-theme', theme);
+            
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        function downloadResume() {
+            // Placeholder for CV download
+            alert(currentLang === 'ja' ? 'Resumeダウンロード機能（実装時にリンクを設定）' : 'Resume Download feature (set link when implementing)');
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
